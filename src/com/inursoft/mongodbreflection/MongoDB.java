@@ -1,7 +1,6 @@
 package com.inursoft.mongodbreflection;
 
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
@@ -9,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.oracle.javafx.jmx.json.JSONException;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -612,7 +612,7 @@ public class MongoDB {
          * @param query 쿼리
          * @return
          */
-        public List find(Class t, Document query)
+        public List find(Class t, Bson query)
         {
             FindIterable iterator = collection.find(query);
             return find(t, iterator);
@@ -626,7 +626,7 @@ public class MongoDB {
          * @param limit 정렬
          * @return
          */
-        public List find(Class t, Document query, int limit)
+        public List find(Class t, Bson query, int limit)
         {
             FindIterable iterator = collection.find(query);
             iterator.limit(limit);
@@ -641,7 +641,7 @@ public class MongoDB {
          * @param sort 정렬
          * @return
          */
-        public List find(Class t, Document query, Document sort)
+        public List find(Class t, Bson query, Bson sort)
         {
             FindIterable iterator = collection.find(query);
             iterator.sort(sort);
@@ -657,7 +657,7 @@ public class MongoDB {
          * @param limit 개수 제한
          * @return
          */
-        public List find(Class t, Document query, Document sort, int limit)
+        public List find(Class t, Bson query, Bson sort, int limit)
         {
             FindIterable iterator = collection.find(query);
             iterator.sort(sort);
@@ -666,76 +666,13 @@ public class MongoDB {
         }
 
 
-
-
-        /**
-         * 데이터베이스에서 데이터를 찾습니다.
-         * @param t 타입
-         * @param query 쿼리
-         * @return
-         */
-        public List find(Class t, BasicDBObject query)
+        public List find(Class t, FindIterable iterable)
         {
-            FindIterable iterator = collection.find(query);
-            return find(t, iterator);
-        }
-
-
-        /**
-         * 데이터베이스에서 데이터를 찾습니다.
-         * @param t 타입
-         * @param query 쿼리
-         * @param limit 정렬
-         * @return
-         */
-        public List find(Class t, BasicDBObject query, int limit)
-        {
-            FindIterable iterator = collection.find(query);
-            iterator.limit(limit);
-            return find(t, iterator);
-        }
-
-
-        /**
-         * 데이터베이스에서 데이터를 찾습니다.
-         * @param t 타입
-         * @param query 쿼리
-         * @param sort 정렬
-         * @return
-         */
-        public List find(Class t, BasicDBObject query, Document sort)
-        {
-            FindIterable iterator = collection.find(query);
-            iterator.sort(sort);
-            return find(t, iterator);
-        }
-
-
-        /**
-         * 데이터베이스에서 데이터를 찾습니다.
-         * @param t 타입
-         * @param query 쿼리
-         * @param sort 정렬
-         * @param limit 개수 제한
-         * @return
-         */
-        public List find(Class t, BasicDBObject query, Document sort, int limit)
-        {
-            FindIterable iterator = collection.find(query);
-            iterator.sort(sort);
-            iterator.limit(limit);
-            return find(t, iterator);
-        }
-
-
-
-
-        private List find(Class t,FindIterable iterator)
-        {
-            final List list = new ArrayList();
-            iterator.forEach((Block) o -> list.add(toObject(t, (Document)o)));
+            List list = new ArrayList();
+            iterable.forEach((Block) o -> list.add(toObject(t, (Document)o)));
             return list;
         }
+
 
 
     }
