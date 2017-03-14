@@ -2,17 +2,22 @@
 ## Created by SKAIBlue
 ### Before using 사용하기 전에
 This library need mongodb-drive 3.2.2<br>
-You can download from [here](https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongodb-driver/3.2.2/mongodb-driver-3.2.2.jar)<br><br>
+You can download from [here](https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongodb-driver/3.2.2/mongodb-driver-3.2.2.jar)<br>
+이 라이브러리는 mongodb-driver 3.2.2가 필요합니다.<br>
+[여기](https://oss.sonatype.org/content/repositories/releases/org/mongodb/mongodb-driver/3.2.2/mongodb-driver-3.2.2.jar)에서 다운받을 수 있습니다.
 
-You can download this library from [here](https://github.com/SKAIBlue/JMongoDBReflection/raw/master/lib/MongoDBReflection.jar)
+You can download this library from [here](https://github.com/SKAIBlue/JMongoDBReflection/raw/master/lib/MongoDBReflection.jar)<br>
+이 라이브러리는 [여기](https://github.com/SKAIBlue/JMongoDBReflection/raw/master/lib/MongoDBReflection.jar)에서 다운받을 수 있습니다.
 
 ### Usage 사용법
-First, you have to import package
+First, you have to import package.<br>
+먼저, 패키지를 import 해야합니다.
 ```JAVA
 import com.inursoft.mongodbreflection.*;
 ```
 
-Next, Connect your mongodb server
+Next, Connect your mongodb server.<br>
+다음은 mongodb 서버에 연결해야 합니다.
 ```JAVA
 /**
 * Connect mongodb server
@@ -29,16 +34,19 @@ MongoDB db = new MongoDB("localhost");
 MongoDB db = new MongoDB("localhost", 27017);
 ```
 
-You can get database like this.
+You can get database like this.<br>
+아래와 같이 database 를 가져올 수 있습니다.
 ```JAVA
 Database database = db.getDatabase(DB_NAME);
 ```
 
-You can get collection like this.
+You can get collection like this.<br>
+collection은 다음과 같이 가져울 수 있습니다.
 ```JAVA
 DBCollection collection = database.getCollection(COLLECTION_NAME);
 ```
 or, You can get collection only one line like this.
+또는 아래와 같이 한번에 collection 을 가져올 수 있습니다. 
 ```JAVA
 DBCollection collection = db.getDatabase(DB_NAME).getCollection(COLLECTION_NAME);
 
