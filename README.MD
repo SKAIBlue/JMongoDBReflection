@@ -41,15 +41,41 @@ Database database = db.getDatabase(DB_NAME);
 ```
 
 You can get collection like this.<br>
-collection은 다음과 같이 가져울 수 있습니다.
+collection 은 다음과 같이 가져울 수 있습니다.
 ```JAVA
 DBCollection collection = database.getCollection(COLLECTION_NAME);
 ```
-or, You can get collection only one line like this.
+or, You can get collection only one line like this.<br>
 또는 아래와 같이 한번에 collection 을 가져올 수 있습니다. 
 ```JAVA
 DBCollection collection = db.getDatabase(DB_NAME).getCollection(COLLECTION_NAME);
 
 DBCollection collection = db.getCollection(DB_NAME, COLLECTION_NAME); 
+```
+
+Finally, You can find, update, insert, delete data you want!<br>
+if you want find data just do this.<br>
+드디어! 원하는대로 데이터를 찾고, 갱신하고, 추가하고, 삭제할 수 있습니다.<br>
+아래의 방법으로 데이터를 찾을 수 있습니다.
+```JAVA
+Document query = new Document();
+query.append(/*query*/);
+List<Type> results = db.find(Type.class, query);
+```
+
+if you want sort data by 'time' to ascending.<br>
+만약 'time'으로 오름차순 정렬한 데이터를 얻고싶다면 아래의 방법을 사용하시면 됩니다.
+```JAVA
+Document query = new Document();
+query.append(/*query*/);
+List<Type> results = db.find(Type.class, query, Sorts.ascending("time"));
+```
+
+You can set data limits.<br>
+찾을 데이터에 제한을 두고싶다면 아래처럼 사용하시면 됩니다.
+```JAVA
+Document query = new Document();
+query.append(/*query*/);
+List<Type> results = db.find(Type.class, query, 10);
 ```
 
